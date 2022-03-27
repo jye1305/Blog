@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ArticleController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -17,5 +18,5 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::view("addUser", 'addUser');
-Route::post("addUser", [Users::class, 'addUser']);
+Route::view("addArticle", 'addArticle');
+Route::post("addArticle", [ArticleController::class, 'addArticle']);

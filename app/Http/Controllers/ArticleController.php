@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Article;
 use Illuminate\Http\Request;
 
 class ArticleController extends Controller
@@ -15,4 +16,5 @@ class ArticleController extends Controller
         $article->save();
         return redirect("addArticle");
     }
+
 }
