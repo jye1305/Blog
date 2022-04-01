@@ -18,5 +18,6 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::view("addArticle", 'addArticle');
-Route::post("addArticle", [ArticleController::class, 'addArticle']);
+// Route::view("addArticle", 'addArticle');
+// Route::post("addArticle", [ArticleController::class, 'addArticle']);
+Route::resource('articles', ArticleController::class);
