@@ -21,3 +21,7 @@ Route::get('/', function () {
 // Route::view("addArticle", 'addArticle');
 // Route::post("addArticle", [ArticleController::class, 'addArticle']);
 Route::resource('articles', ArticleController::class);
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
