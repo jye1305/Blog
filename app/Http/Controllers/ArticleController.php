@@ -16,7 +16,9 @@ class ArticleController extends Controller
     public function index()
     {
         //
-        return Article::all();
+        $articles = Article::all();
+
+        return View::make('articles.index')->with('articles',$articles);
     }
 
     /**
@@ -43,7 +45,7 @@ class ArticleController extends Controller
         $article->title = $request->title;
         $article->description = $request->description;
         $article->save();
-        return redirect("articles/create");
+        return redirect("articles");
     }
 
     /**
@@ -55,6 +57,10 @@ class ArticleController extends Controller
     public function show($id)
     {
         //
+        $article = Article::find($id);
+
+        return View::make('articles.show')
+        ->with('article', $article);
     }
 
     /**
@@ -67,7 +73,6 @@ class ArticleController extends Controller
     {
         //
         // get the article
-        $id = 1;
         $article = Article::find($id);
 
         // show the edit form and pass the article
@@ -92,7 +97,7 @@ class ArticleController extends Controller
         $article->description = $request->get('description');
         $article->save();
 
-
+        return redirect("articles");
     }
 
     /**
@@ -106,5 +111,7 @@ class ArticleController extends Controller
         //
         $article = Article::find($id);
         $article->delete();
+
+        return redirect("articles");
     }
 }

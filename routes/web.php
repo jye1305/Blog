@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ArticleController;
+use App\Http\Controllers\CategoryController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -21,6 +22,8 @@ Route::get('/', function () {
 // Route::view("addArticle", 'addArticle');
 // Route::post("addArticle", [ArticleController::class, 'addArticle']);
 Route::resource('articles', ArticleController::class);
+
+Route::resource('categories', CategoryController::class);
 
 Auth::routes();
 
