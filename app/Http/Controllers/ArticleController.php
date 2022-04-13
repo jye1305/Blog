@@ -19,6 +19,7 @@ class ArticleController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
+        //$this->authorizeResource(Article::class, 'article');
     }
 
     public function index()
@@ -89,6 +90,8 @@ class ArticleController extends Controller
         $article = Article::find($id);
         $categories = Category::all();
 
+        $this->authorize('update', $article);
+
         // show the edit form and pass the article
         return View::make('articles.edit')
             ->with('article',$article)
@@ -112,6 +115,7 @@ class ArticleController extends Controller
         $article->save();
         $categories = $request->categories;
         $article->categories()->sync($categories);
+
         return redirect("articles");
     }
 
@@ -125,6 +129,7 @@ class ArticleController extends Controller
     {
         //
         $article = Article::find($id);
+        $this->authorize('delete', $article);
         $article->delete();
 
         return redirect("articles");

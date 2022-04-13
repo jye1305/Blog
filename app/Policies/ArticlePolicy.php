@@ -6,9 +6,17 @@ use App\Models\Article;
 use App\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
+
 class ArticlePolicy
 {
     use HandlesAuthorization;
+
+    public function before(User $user, $ability)
+    {
+        if ($user->role == "admin"){
+            return true;
+        }
+    }
 
     /**
      * Determine whether the user can view any models.
@@ -19,6 +27,7 @@ class ArticlePolicy
     public function viewAny(User $user)
     {
         //
+        return true;
     }
 
     /**
@@ -31,6 +40,7 @@ class ArticlePolicy
     public function view(User $user, Article $article)
     {
         //
+        return true;
     }
 
     /**
@@ -42,6 +52,7 @@ class ArticlePolicy
     public function create(User $user)
     {
         //
+        return true;
     }
 
     /**
@@ -54,6 +65,7 @@ class ArticlePolicy
     public function update(User $user, Article $article)
     {
         //
+        return $user->id === $article->user_id;
     }
 
     /**
@@ -66,6 +78,7 @@ class ArticlePolicy
     public function delete(User $user, Article $article)
     {
         //
+        return $user->id === $article->user_id;
     }
 
     /**
@@ -78,6 +91,7 @@ class ArticlePolicy
     public function restore(User $user, Article $article)
     {
         //
+        return $user->id === $article->user_id;
     }
 
     /**
@@ -90,5 +104,6 @@ class ArticlePolicy
     public function forceDelete(User $user, Article $article)
     {
         //
+        return $user->id === $article->user_id;
     }
 }
