@@ -14,6 +14,7 @@
 <tr>
     <td>{{$value['id']}}</td>
     <td>{{$value['category_name']}}</td>
+    <td><a href = {{ URL::to('categories/' . $value->id) }}>Show</a></td>
     <td><a href = {{ URL::to('categories/' . $value->id . '/edit') }}>Edit</a></td>
     <td>
         <form action="{{url('categories/'.$value->id)}}" method="post">
