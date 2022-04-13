@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Article;
+use App\Models\Category;
 use Illuminate\Support\Facades\View;
+use Illuminate\Support\Facades\Auth;
 
 class ArticleController extends Controller
 {
@@ -13,6 +15,12 @@ class ArticleController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     public function index()
     {
         //
@@ -29,7 +37,8 @@ class ArticleController extends Controller
     public function create()
     {
         //
-        return View::make('articles.create');
+        $categories = Category::all();
+        return View::make('articles.create')->with('categories',$categories);
     }
 
     /**
@@ -44,7 +53,10 @@ class ArticleController extends Controller
         $article = new Article;
         $article->title = $request->title;
         $article->description = $request->description;
+        $article->user_id = $request->user_id;
         $article->save();
+        $categories = $request->categories;
+        $article->categories()->attach($categories);
         return redirect("articles");
     }
 
@@ -58,9 +70,11 @@ class ArticleController extends Controller
     {
         //
         $article = Article::find($id);
+        $user = Auth::user();
+        $categories = Category::orderBy('id');
 
         return View::make('articles.show')
-        ->with('article', $article);
+        ->with('article', $article, 'user', $user, 'categories', $categories);
     }
 
     /**

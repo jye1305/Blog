@@ -1,3 +1,6 @@
+<h1>List of Categories</h1><br>
+<a href = {{ URL::to('categories/create' ) }}>Add new Category</a><br><br>
+
 <table>
 <thead>
     <tr>
