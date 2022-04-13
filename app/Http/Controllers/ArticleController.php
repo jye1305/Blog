@@ -71,10 +71,9 @@ class ArticleController extends Controller
         //
         $article = Article::find($id);
         $user = Auth::user();
-        $categories = Category::orderBy('id');
 
         return View::make('articles.show')
-        ->with('article', $article, 'user', $user, 'categories', $categories);
+        ->with('article', $article, 'user', $user);
     }
 
     /**
@@ -88,10 +87,12 @@ class ArticleController extends Controller
         //
         // get the article
         $article = Article::find($id);
+        $categories = Category::all();
 
         // show the edit form and pass the article
         return View::make('articles.edit')
-            ->with('article', $article);
+            ->with('article',$article)
+            ->with('categories', $categories);
     }
 
     /**
@@ -104,13 +105,13 @@ class ArticleController extends Controller
     public function update(Request $request, $id)
     {
         //
-        $id=1;
          $article = Article::findOrFail($id);
         // Getting values from the blade template form
         $article->title =  $request->get('title');
         $article->description = $request->get('description');
         $article->save();
-
+        $categories = $request->categories;
+        $article->categories()->sync($categories);
         return redirect("articles");
     }
 
