@@ -93,6 +93,48 @@ hr {
   opacity: 0.25;
 }
 
+.navbar-brand{
+  text-shadow: 0;
+  color: red;
+  font-size:200px;
+}
+
+.app{
+  margin:0;
+}
+
+.jumbotron-up{
+  padding: 50px;
+  margin: 0;
+
+}
+.jumbotron{
+  background-color: #f0f0f0;
+  border-radius: 15px;
+}
+.jumbotron-footer{
+  background-color: #d1cfcf;
+}
+
+.jumbotron-create{
+  background-color:white;
+}
+
+.container-crud{
+  text-align: left;
+}
+
+
+.container-description{
+  background-color: #ebe6e6;
+  border-radius: 15px;
+}
+
+.img-fluid{
+  margin: 0;
+  padding: 0;
+}
+
 hr:not([size]) {
   height: 1px;
 }
